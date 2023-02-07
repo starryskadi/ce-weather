@@ -1,4 +1,7 @@
-# React Chrome Extension Boilerplate
+# Weather - Chrome Extension
+
+- Integrate with openweathermap.org/api
+- Material UI | React
 
 ## Getting Started
 

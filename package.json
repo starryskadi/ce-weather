@@ -1,7 +1,7 @@
 {
-  "name": "baseline-extension",
+  "name": "weather-chrome-extension",
   "version": "1.0.0",
-  "description": "Chrome Extension Baseline",
+  "description": "Weather Chrome Extension",
   "scripts": {
     "start": "webpack --watch --progress --config webpack.dev.js",
     "build": "webpack --watch --progress --config webpack.prod.js"
