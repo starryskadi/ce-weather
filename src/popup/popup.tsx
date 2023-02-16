@@ -1,18 +1,23 @@
 import React, { useRef, useState, useEffect} from 'react'
 import ReactDOM from 'react-dom'
-import { InputBase, IconButton, Paper, Box, Grid } from "@material-ui/core"
+import { InputBase, IconButton, Paper, Box, Grid, Icon } from "@material-ui/core"
 import { Add as AddIcon } from "@material-ui/icons"
 import './popup.css'
 import WeatherCard from './WeatherCard'
-import { setStoredCities, getStoredCities } from '../utils/storage'
+import { setStoredCities, setStoredOptions, getStoredCities, getStoredOptions, LocalStorageOptions } from '../utils/storage'
 
 const App: React.FC<{}> = () => {
   const  [cites, setCities] = useState<string[]>([])
   const cityInputRef = useRef<HTMLInputElement | null>(null)
+  const [options, setOptions] = useState<LocalStorageOptions | null>(null)
 
   useEffect(() => {
     getStoredCities().then(cites => {
       setCities(cites)
+    })
+
+    getStoredOptions().then(options => {
+      setOptions(options)
     })
   }, [])
 
@@ -32,6 +37,20 @@ const App: React.FC<{}> = () => {
     updateCites.splice(index, 1)
     setCities(updateCites)
     setStoredCities(updateCites)
+  }
+
+  const onTempScaleHandler = () => {
+    const updateTempScale: LocalStorageOptions = {
+      ...options,
+      tempScale: options.tempScale === "metric" ? "imperial": "metric"
+    } 
+    setStoredOptions(updateTempScale).then(each => {
+      setOptions(updateTempScale)
+    })
+  }
+
+  if (!options) {
+    return null
   }
 
   return (
@@ -59,12 +78,17 @@ const App: React.FC<{}> = () => {
                   <AddIcon></AddIcon>
                 </IconButton>
               </Grid>
+              <Grid item>
+                <IconButton onClick={onTempScaleHandler}>
+                    {options.tempScale === "imperial" ? "℉": "℃"}
+                </IconButton>
+              </Grid>
           </Grid>
-       
         </Box>
       </Paper>
-      {cites.map((city, index) => (
-         <WeatherCard city={city} onDelete={() => { onCityDeleteHandler(index) }} />
+      
+      {options.apiKey && cites.map((city, index) => (
+         <WeatherCard apiKey={options.apiKey} key={city} tempScale={options.tempScale} city={city} onDelete={() => { onCityDeleteHandler(index) }} />
       ))}
     </div>
   )

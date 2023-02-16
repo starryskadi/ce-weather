@@ -1,4 +1,4 @@
-import { OPEN_WEATHER_API_KEY } from "./config"
+export type OpenWeatherTempScale = "metric" | "imperial"
 
 export interface OpenWeatherData {
     name: string,
@@ -22,8 +22,8 @@ export interface OpenWeatherData {
     }
 }
 
-export async function fetchOpenWeatherData(city: string): Promise<OpenWeatherData> {
-    const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${OPEN_WEATHER_API_KEY}`)
+export async function fetchOpenWeatherData(city: string, tempScale: OpenWeatherTempScale, openWeatherApiKey: string): Promise<OpenWeatherData> {
+    const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${tempScale}&appid=${openWeatherApiKey}`)
 
     if (!res.ok) {
         throw new Error("City Not Found")
