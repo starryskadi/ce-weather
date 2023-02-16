@@ -1,13 +1,17 @@
+![Weather - Chrome Extension Intro Image](./intro.png)
+
 # Weather - Chrome Extension
 
-- Integrate with openweathermap.org/api
-- Material UI | React
+This is a simple and user-friendly weather extension for Google Chrome that displays current weather conditions, temperature, and other relevant information for your selected location. It integrates with the OpenWeather API to provide accurate and up-to-date weather data.
 
-## Getting Started
+You can choose between metric and imperial units, depending on your preferences. T
 
-1. `npm i` to install dependancies
-2. `npm start` to start running the fast development mode Webpack build process that bundle files into the `dist` folder
-3. `npm i --save-dev <package_name>` to install new packages
+To get started, simply enter your api key in options page and location in the extension's popup menu and the weather information will automatically update based on your selection.
+
+## Features:
+
+Real-time weather updates
+Temperature displayed in either Celsius or Fahrenheit
 
 ## Loading The Chrome Extension
 
@@ -16,21 +20,11 @@
 3. Click `Load unpacked`
 4. Select the entire `dist` folder
 
-# Important Initial Steps
+## Usage:
 
-1. `git init` to start a new git repo for tracking your changes, do an initial base commit with all the default files
-2. Update `package.json`, important fields include `author`, `version`, `name` and `description`
-3. Update `manifest.json`, important fields include `version`, `name` and `description`
-4. Update `webpack.commmon.js`, the title in the `getHtmlPlugins` function should be your extension name
+Click on the extension icon in your browser's toolbar
+Enter your api key in options page
+Enter your location in the popup menu
+The weather information will automatically update based on your selection
 
-# Production Build
-
-1. `npm run build` to generate a minimized production build in the `dist` folder
-2. ZIP the entire `dist` folder (e.g. `dist.zip`)
-3. Publish the ZIP file on the Chrome Web Store Developer Dashboard!
-
-## Important Default Boilerplate Notes
-
-- Folders get flattened, static references to images from HTML do not need to be relative (i.e. `icon.png` instead of `../static/icon.png`)
-- Importing local ts/tsx/css files should be relative, since Webpack will build a dependancy graph using these paths
-- Update the manifest file as per usual for chrome related permissions, references to files in here should also be flattened and not be relative
+Note: This extension requires an OpenWeather API key, which you can obtain for free at https://openweathermap.org/api.
